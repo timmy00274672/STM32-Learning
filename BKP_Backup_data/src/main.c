@@ -2,12 +2,21 @@
 #include "stm32f10x_lib.h"		
 #include "stm32f10x_pwr.h"
 
+#define RAND_FIRST 0xA53C
 int main(void)
 {
 	RCC_Configuration();
 	GPIO_Configuration();
 	USART_Configuration();
 	BKP_Configuration();
+
+	if(CheckBackupReg(RAND_FIRST) == 0x00)
+	{
+		printf("\r\nThe datas are as their inital status\r\n");
+	}else{
+		printf("\r\nThe datas are cleared\r\n");
+
+	}
 }
 
 void RCC_Configuration(void)
@@ -97,4 +106,27 @@ void BKP_Configuration(void)
 {
 	PWR_BackupAccessCmd(ENABLE);
 	BKP_ClearFlag(); //Clears Tamper Pin Event pending flag
+}
+
+u8 CheckBackupReg(u16 FirstBackupData)
+{
+	if(BKP_ReadBackupRegister(BKP_DR1) != FirstBackupData) return 1;
+	if(BKP_ReadBackupRegister(BKP_DR2) != FirstBackupData + 0x22) return 2;
+	if(BKP_ReadBackupRegister(BKP_DR3) != FirstBackupData + 0x33) return 3;
+	if(BKP_ReadBackupRegister(BKP_DR4) != FirstBackupData + 0x44) return 4;
+	if(BKP_ReadBackupRegister(BKP_DR5) != FirstBackupData + 0x55) return 5;
+	if(BKP_ReadBackupRegister(BKP_DR6) != FirstBackupData + 0x66) return 6;
+	if(BKP_ReadBackupRegister(BKP_DR7) != FirstBackupData + 0x77) return 7;
+	if(BKP_ReadBackupRegister(BKP_DR8) != FirstBackupData + 0x88) return 8;
+	if(BKP_ReadBackupRegister(BKP_DR9) != FirstBackupData + 0x99) return 9;
+	if(BKP_ReadBackupRegister(BKP_DR10) != FirstBackupData + 0xaa) return 10;
+	return 0;
+
+}
+
+int fputc(int ch, FILE *f)
+{
+	USART_SendData(USART1, (u16)ch);
+    while(USART_GetFlagStatus(USART1,USART_FLAG_TC) == RESET);
+    return ch;
 }
