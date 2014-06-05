@@ -19,9 +19,9 @@ In the repo, I just copy the examples from *STM32 Note*.
 2. Include C/C++ libriary directories:
 
 	```
-	$WS_DIR$\..\simple_cmsis
 	$WS_DIR$\..\CMSIS_V1P10\Core\CM3
 	$WS_DIR$\..\FWLib\library\inc
+	$WS_DIR$\..\FWLib\project
 	$WS_DIR$\inc
 	```
 3. Add Group `CMSIS_Include` (optional)
@@ -69,9 +69,9 @@ Select Full library, and just use printf and scanf via Terminal I/O (select in `
 
 ### Configurate the linker
 
-Use the linker configuration files: `$WS_DIR$\..\FWLib\project\EWARMv5stm32f10x_flash.icf`.
+Use the linker configuration files: `$WS_DIR$\..\FWLib\project\EWARMv5\stm32f10x_flash.icf`.
 
-	This file is the IAR specific linking and loading file used to load in Flash and execute code and variables to target memories and regions. You can customize this file to your need.
+This file is the IAR specific linking and loading file used to load in Flash and execute code and variables to target memories and regions. You can customize this file to your need.
 
 ### Configuration Debbuger
 
