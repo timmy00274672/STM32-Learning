@@ -1,8 +1,9 @@
 /*******************************************************************************
-* File Name          : readme.md
-* Author             : timmy00274672 (timmy00274672@gmail.com)
-* Date               : 06/05/2014
-* Description        : This file describe the environment-related setting.
+* File Name       	: readme.md
+* Author          	: timmy00274672 (timmy00274672@gmail.com)
+* Date            	: 06/05/2014
+* Version			: Version 2.1
+* Description     	: This file describe the environment-related setting.
 *******************************************************************************/
 
 In the repo, I just copy the examples from *STM32 Note*.
@@ -62,6 +63,10 @@ In the repo, I just copy the examples from *STM32 Note*.
 9. More information can be found in `$WS_DIR$\..\FWLib\project\readme`.
 
 ## Additional Project Properties
+
+### Set processor variant
+
+Set device = `ST STM32F10xxB`
 
 ### Show debug information
 
