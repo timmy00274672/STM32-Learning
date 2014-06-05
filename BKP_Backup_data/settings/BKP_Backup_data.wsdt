@@ -63,8 +63,8 @@
           <Filename>$WS_DIR$\..\FWLib\library\src\stm32f10x_rcc.c</Filename>
           <XPos>0</XPos>
           <YPos>785</YPos>
-          <SelStart>30515</SelStart>
-          <SelEnd>30529</SelEnd>
+          <SelStart>30765</SelStart>
+          <SelEnd>30765</SelEnd>
         </Tab>
         <ActiveTab>0</ActiveTab>
         <Tab>
