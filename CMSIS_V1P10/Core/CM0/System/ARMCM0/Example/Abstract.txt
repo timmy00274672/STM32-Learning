@@ -1,0 +1,18 @@
+The 'CMSIS_Hal' project is a simple program for the Cortex-M0 
+using ??? Evaluation Board and demonstrating 
+the use of Systick in interrupt driven mode.
+
+Example functionality:                                                   
+ - Clock Settings:
+   - XTAL    =            8.00 MHz
+   - SYSCLK  =           72.00 MHz
+
+The Usart program is available in different targets:
+  Simulator:   - configured for software Simulator
+  ARMCM0:      - runs from Internal Flash located on chip
+                 (used for production or target debugging)
+
+
+
+-- CMSIS ---------------------------------------------
+Systick runs in interrupt mode

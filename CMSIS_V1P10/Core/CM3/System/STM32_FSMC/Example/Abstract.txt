@@ -1,0 +1,23 @@
+The 'CMSIS_Hal' project is a simple program for the STM32F103RBT6 
+using Keil 'MCBSTM32' Evaluation Board and demonstrating 
+the use of Systick in interrupt driven mode.
+
+Example functionality:                                                   
+ - Clock Settings:
+   - XTAL    =            8.00 MHz
+   - SYSCLK  =           72.00 MHz
+   - HCLK    = SYSCLK  = 72.00 MHz
+   - PCLK1   = HCLK/2  = 36.00 MHz
+   - PCLK2   = HCLK    = 72.00 MHz
+   - ADCLK   = PCLK2/6 = 12.00 MHz
+   - SYSTICK = HCLK/8  =  9.00 MHz
+
+The Usart program is available in different targets:
+  Simulator:   - configured for software Simulator
+  MCBSTM32:    - runs from Internal Flash located on chip
+                 (used for production or target debugging)
+
+
+
+-- CMSIS ---------------------------------------------
+Systick runs in interrupt mode
