@@ -14,8 +14,10 @@ int main(void)
 	{
 		printf("\r\nThe datas are as their inital status\r\n");
 	}else{
-		printf("\r\nThe datas are cleared\r\n");
-
+		printf("\r\nThe datas are cleared, now setting the DRx\r\n");
+		BKP_ClearFlag(); //Clears Tamper Pin Event pending flag.
+		WriteToBackupReg(RAND_FIRST);
+		PrintBackupReg();
 	}
 }
 
@@ -110,7 +112,7 @@ void BKP_Configuration(void)
 
 u8 CheckBackupReg(u16 FirstBackupData)
 {
-	if(BKP_ReadBackupRegister(BKP_DR1) != FirstBackupData) return 1;
+	if(BKP_ReadBackupRegister(BKP_DR1) != FirstBackupData + 0x11) return 1;
 	if(BKP_ReadBackupRegister(BKP_DR2) != FirstBackupData + 0x22) return 2;
 	if(BKP_ReadBackupRegister(BKP_DR3) != FirstBackupData + 0x33) return 3;
 	if(BKP_ReadBackupRegister(BKP_DR4) != FirstBackupData + 0x44) return 4;
@@ -129,4 +131,34 @@ int fputc(int ch, FILE *f)
 	USART_SendData(USART1, (u16)ch);
     while(USART_GetFlagStatus(USART1,USART_FLAG_TC) == RESET);
     return ch;
+}
+
+void WriteToBackupReg(u16 FirstBackupData)
+{
+	BKP_WriteBackupRegister(BKP_DR1, FirstBackupData + 0x11);
+	BKP_WriteBackupRegister(BKP_DR2, FirstBackupData + 0x22);
+	BKP_WriteBackupRegister(BKP_DR3, FirstBackupData + 0x33);
+	BKP_WriteBackupRegister(BKP_DR4, FirstBackupData + 0x44);
+	BKP_WriteBackupRegister(BKP_DR5, FirstBackupData + 0x55);
+	BKP_WriteBackupRegister(BKP_DR6, FirstBackupData + 0x66);
+	BKP_WriteBackupRegister(BKP_DR7, FirstBackupData + 0x77);
+	BKP_WriteBackupRegister(BKP_DR8, FirstBackupData + 0x88);
+	BKP_WriteBackupRegister(BKP_DR9, FirstBackupData + 0x99);
+	BKP_WriteBackupRegister(BKP_DR10, FirstBackupData + 0xaa);
+}
+
+void PrintBackupReg(void)
+{
+	printf("\r\nDRx now are:\r\n");
+	printf("DR1  = 0x%04X\t", BKP_ReadBackupRegister(BKP_DR1));
+	printf("DR2  = 0x%04X\t", BKP_ReadBackupRegister(BKP_DR2));
+	printf("DR3  = 0x%04X\t", BKP_ReadBackupRegister(BKP_DR3));
+	printf("DR4  = 0x%04X\t", BKP_ReadBackupRegister(BKP_DR4));
+	printf("DR5  = 0x%04X\t", BKP_ReadBackupRegister(BKP_DR5));
+	printf("\r\n");
+	printf("DR6  = 0x%04X\t", BKP_ReadBackupRegister(BKP_DR6));
+	printf("DR7  = 0x%04X\t", BKP_ReadBackupRegister(BKP_DR7));
+	printf("DR8  = 0x%04X\t", BKP_ReadBackupRegister(BKP_DR8));
+	printf("DR9  = 0x%04X\t", BKP_ReadBackupRegister(BKP_DR9));
+	printf("DR10 = 0x%04X\t", BKP_ReadBackupRegister(BKP_DR10));
 }
