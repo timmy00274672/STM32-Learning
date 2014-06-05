@@ -88,3 +88,35 @@ This file is the IAR specific linking and loading file used to load in Flash and
 	- use flash loader (make sure that processor setting is correct or manually select proper one)
 
 		For example, `$TOOLKIT_DIR$\config\flashloader\ST\FlashSTM32F10xxB.board`
+
+## Notes
+
+### Interrupt Handler
+
+Observe the the *Default interrupt handlers* section in `startup_stm32f10x.s`:
+
+```
+        THUMB
+
+        PUBWEAK NMI_Handler
+        SECTION .text:CODE:REORDER(1)
+NMI_Handler
+        B NMI_Handler
+        PUBWEAK HardFault_Handler
+        SECTION .text:CODE:REORDER(1)
+HardFault_Handler
+        B HardFault_Handler
+        PUBWEAK MemManage_Handler
+        SECTION .text:CODE:REORDER(1)
+MemManage_Handler
+        B MemManage_Handler
+        PUBWEAK BusFault_Handler
+        SECTION .text:CODE:REORDER(1)
+
+        .........
+```
+
+The keyword `PUBWEAK` means that if there is no method in the linking phase, the
+default interrupt handler will be publicize. Therefore, you can implement the 
+handler anywhere provided the name matchs the default interrupt handler.
+
