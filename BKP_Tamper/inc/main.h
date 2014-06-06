@@ -2,7 +2,7 @@
 * File Name      : 	main.h
 * Author         : 	timmy00274672 (timmy00274672@gmail.com)
 * Date           : 	06/06/2014
-* Version        : 	Version 1.0
+* Version        : 	Version 2.0
 * Description    : 	This source file for BKP_Tamper. Part of the code are directly
 					copy from the BKP_Backup_data, and add tamper-related code, 
 					including NVIC_Configuration() and corresponding handler.
@@ -66,3 +66,7 @@ u8 IsBackupRegReset(u16);
 **/
 int fputc(int ch, FILE *f);
 
+/**
+*	Open the RTC_IRQChannel
+**/
+void NVIC_Configuration(void);

@@ -1736,11 +1736,17 @@
     <file>
       <name>$PROJ_DIR$\inc\main.h</name>
     </file>
+    <file>
+      <name>$PROJ_DIR$\inc\stm32f10x_it.h</name>
+    </file>
   </group>
   <group>
     <name>User</name>
     <file>
       <name>$PROJ_DIR$\src\main.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\src\stm32f10x_it.c</name>
     </file>
   </group>
 </project>

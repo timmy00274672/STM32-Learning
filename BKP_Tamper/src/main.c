@@ -2,7 +2,7 @@
 * File Name      : 	main.c
 * Author         : 	timmy00274672 (timmy00274672@gmail.com)
 * Date           : 	06/06/2014
-* Version        : 	Version 1.0
+* Version        : 	Version 2.0
 * Description    : 	This source file for BKP_Tamper. Part of the code are directly
 					copy from the BKP_Backup_data, and add tamper-related code, 
 					including NVIC_Configuration() and corresponding handler.
@@ -18,6 +18,7 @@ int main(void)
 	RCC_Configuration();
 	GPIO_Configuration();
 	USART_Configuration();
+	NVIC_Configuration();
 	BKP_Configuration();
 
 	if(CheckBackupReg(RAND_FIRST) == 0x00)
@@ -29,6 +30,7 @@ int main(void)
 		WriteToBackupReg(RAND_FIRST);
 		PrintBackupReg();
 	}
+        while(1);
 }
 
 void RCC_Configuration(void)
@@ -118,6 +120,9 @@ void BKP_Configuration(void)
 {
 	PWR_BackupAccessCmd(ENABLE);
 	BKP_ClearFlag(); //Clears Tamper Pin Event pending flag
+	BKP_TamperPinLevelConfig(BKP_TamperPinLevel_Low);
+	BKP_ITConfig(ENABLE);
+	BKP_TamperPinCmd(ENABLE);
 }
 
 u8 CheckBackupReg(u16 FirstBackupData)
@@ -171,4 +176,16 @@ void PrintBackupReg(void)
 	printf("DR8  = 0x%04X\t", BKP_ReadBackupRegister(BKP_DR8));
 	printf("DR9  = 0x%04X\t", BKP_ReadBackupRegister(BKP_DR9));
 	printf("DR10 = 0x%04X\t", BKP_ReadBackupRegister(BKP_DR10));
+}
+
+void NVIC_Configuration(void)
+{
+	NVIC_InitTypeDef NVIC_InitStructure;
+	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+
+	NVIC_InitStructure.NVIC_IRQChannel = TAMPER_IRQChannel;
+  	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
+  	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+  	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+  	NVIC_Init(&NVIC_InitStructure);
 }
