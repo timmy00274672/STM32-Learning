@@ -21,6 +21,7 @@ Calendar time_now = {2014,6,6,17,0,0}; //The inital time in Calendar format
 
 int main(void)
 {
+
 	RCC_Configuration();
 	NVIC_Configuration();
 	GPIO_Configuration();
@@ -28,6 +29,7 @@ int main(void)
 	RTC_Configuration();
 	Time_SetCalendarTime(time_now);
 	while(1) Time_Show();
+	
 }
 
 void RCC_Configuration(void)
@@ -52,7 +54,8 @@ void RCC_Configuration(void)
     }
 
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_PWR | RCC_APB1Periph_BKP,ENABLE);
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_USART1,ENABLE);
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_USART1 | RCC_APB2Periph_AFIO
+    	,ENABLE);
 }
 
 void NVIC_Configuration(void)
@@ -99,10 +102,13 @@ void RTC_Configuration(void)
 {
 	PWR_BackupAccessCmd(ENABLE);
 	BKP_DeInit();
-	RCC_LSEConfig(RCC_LSE_ON);  // LSE oscillator ON
-	while(RCC_GetFlagStatus(RCC_FLAG_LSERDY)==RESET); // wait for LSE oscillator clock ready
+	//RCC_LSEConfig(RCC_LSE_ON);  // LSE oscillator ON
+	//while(RCC_GetFlagStatus(RCC_FLAG_LSERDY)==RESET); // wait for LSE oscillator clock ready
+	//RCC_RTCCLKConfig(RCC_RTCCLKSource_LSE); // LSE selected as RTC clock
+	RCC_LSICmd(ENABLE);  // Enable LSI
+	while(RCC_GetFlagStatus(RCC_FLAG_LSIRDY) == RESET);
+	RCC_RTCCLKConfig(RCC_RTCCLKSource_LSI);               /* Select the RTC Clock Source */
 
-	RCC_RTCCLKConfig(RCC_RTCCLKSource_LSE); // LSE selected as RTC clock
 	RCC_RTCCLKCmd(ENABLE);
 
 	/*
@@ -119,7 +125,8 @@ void RTC_Configuration(void)
 	*	This function must be called before any write to RTC registers.
 	*/
 	RTC_WaitForLastTask(); 
-	RTC_SetPrescaler(32767);
+	// RTC_SetPrescaler(32767);
+	RTC_SetPrescaler(39999);
 
 	RTC_WaitForLastTask(); 
 }
