@@ -8,6 +8,7 @@
 #include "time.h"
 #include "stm32f10x_lib.h"
 #include "stdio.h"
+
 typedef struct tm Calendar;
 /**
 *	Open PWR BKP clock (BKP is enabled when PWR backup access is enabled)
@@ -33,7 +34,7 @@ void GPIO_Configuration(void);
 *	4. Set Prescaler as 92767 such that the frequency = 32.768 KHz / ( 32767 + 1 ) = 1 Hz
 *	Before each access to those backup registers, make sure the last action is over.
 **/
-void RTC_configuration(void);
+void RTC_Configuration(void);
 
 /**
 	Set the clock including CPOL, CPHA, LastBit
@@ -75,7 +76,7 @@ u32 Time_GetUnitTime(void);
 *	@param t : time in UNIX format
 *	@return t in calendar format
 **/
-Calendar Time_ConvUnixToCalendar(u32 t);
+Calendar Time_ConvUnixToCalendar(time_t t);
 
 /**
 *	Set the RTC counter as t
