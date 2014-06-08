@@ -1734,6 +1734,9 @@
   <group>
     <name>Include</name>
     <file>
+      <name>$PROJ_DIR$\..\FWLib\project\EWARMv5\cortexm3_macro.s</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\inc\main.h</name>
     </file>
     <file>

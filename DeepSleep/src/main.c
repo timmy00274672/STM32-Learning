@@ -10,7 +10,47 @@
 
 int main(void)
 {
-	
+	RCC_Configuration();
+	GPIO_Configuration();
+	EXTI_Configuration();
+	NVIC_Configuration();
+	SysTick_Configuration();
+
+	//shine three times
+	GPIO_WriteBit(GPIOA,GPIO_Pin_4,Bit_SET);
+	Delay_NSecond(1);
+	GPIO_WriteBit(GPIOA,GPIO_Pin_4,Bit_RESET);
+	Delay_NSecond(1);
+
+	GPIO_WriteBit(GPIOA,GPIO_Pin_4,Bit_SET);
+	Delay_NSecond(1);
+	GPIO_WriteBit(GPIOA,GPIO_Pin_4,Bit_RESET);
+	Delay_NSecond(1);
+
+	GPIO_WriteBit(GPIOA,GPIO_Pin_4,Bit_SET);
+	Delay_NSecond(1);
+	GPIO_WriteBit(GPIOA,GPIO_Pin_4,Bit_RESET);
+	Delay_NSecond(1);
+
+	PWR_EnterSTOPMode(PWR_Regulator_LowPower,PWR_STOPEntry_WFI);
+
+	GPIO_WriteBit(GPIOA,GPIO_Pin_4,Bit_SET);
+	Delay_NSecond(1);
+	GPIO_WriteBit(GPIOA,GPIO_Pin_4,Bit_RESET);
+	Delay_NSecond(1);
+
+	GPIO_WriteBit(GPIOA,GPIO_Pin_4,Bit_SET);
+	Delay_NSecond(1);
+	GPIO_WriteBit(GPIOA,GPIO_Pin_4,Bit_RESET);
+	Delay_NSecond(1);
+
+	GPIO_WriteBit(GPIOA,GPIO_Pin_4,Bit_SET);
+	Delay_NSecond(1);
+	GPIO_WriteBit(GPIOA,GPIO_Pin_4,Bit_RESET);
+	Delay_NSecond(1);
+
+	while(1);
+
 }
 /**
 *	open clock on APB1 : PWR
