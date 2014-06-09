@@ -1745,6 +1745,9 @@
     <file>
       <name>$PROJ_DIR$\src\main.c</name>
     </file>
+    <file>
+      <name>$PROJ_DIR$\src\stm32f10x_it.c</name>
+    </file>
   </group>
 </project>
 

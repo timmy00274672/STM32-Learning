@@ -2,7 +2,7 @@
 * File Name      : 	main.h
 * Author         : 	timmy00274672 (timmy00274672@gmail.com)
 * Date           : 	06/09/2014
-* Version        : 	Version 1.1
+* Version        : 	Version 2.1
 * Description    : 	This head file for ADC_Basic 
 *******************************************************************************/
 #include "stm32f10x_lib.h"
@@ -36,6 +36,7 @@ void GPIO_Configuration(void);
 		Rank 1
 		Sampling cycle : 55.5
 	4.	Calibrate
+	5.	Enable interrupt for end of the conversion
 **/
 void ADC_Configuration(void);
 
@@ -44,6 +45,11 @@ void ADC_Configuration(void);
 	Set the Frame including BaudRate, WordLength, StopBits, Parity, HardareFlowControl, Mode
 **/
 void USART_Configuration(void);
+
+/**
+*	Open the ADC1_2_IRQChannel
+**/
+void NVIC_Configuration(void);
 
 /**
 *	Write the `ch` to USART1

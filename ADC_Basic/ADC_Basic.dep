@@ -2,7 +2,7 @@
 
 <project>
   <fileVersion>2</fileVersion>
-  <fileChecksum>2620562495</fileChecksum>
+  <fileChecksum>3634646114</fileChecksum>
   <configuration>
     <name>Debug</name>
     <outputs>
@@ -144,6 +144,7 @@
       <file>$PROJ_DIR$\..\FWLib\library\inc\stm32f10x_spi.h</file>
       <file>$PROJ_DIR$\..\FWLib\library\inc\stm32f10x_wwdg.h</file>
       <file>$PROJ_DIR$\..\FWLib\library\inc\stm32f10x_tim.h</file>
+      <file>$PROJ_DIR$\..\FWLib\project\stm32f10x_it.h</file>
     </outputs>
     <file>
       <name>$PROJ_DIR$\..\CMSIS_V1P10\Core\CM3\core_cm3.c</name>
@@ -693,17 +694,27 @@
       <name>$PROJ_DIR$\src\stm32f10x_it.c</name>
       <outputs>
         <tool>
+          <name>ICCARM</name>
+          <file> 65</file>
+        </tool>
+        <tool>
           <name>BICOMP</name>
           <file> 95</file>
         </tool>
       </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 138 129 114 37 38 39 40 119 115 116 118 120 124 123 125 121 126 128 127 122 132 117 133 130 135 131 137 134 136 110 99 101 102 109 103 104 105 111</file>
+        </tool>
+      </inputs>
     </file>
     <file>
       <name>$PROJ_DIR$\Debug\Exe\BKP_Backup_data.out</name>
       <inputs>
         <tool>
           <name>ILINK</name>
-          <file> 112 1 68 66 67 41 42 44 45 46 47 43 49 48 50 51 52 54 53 56 55 58 59 60 57 62 61 64 63 0 108 113 107</file>
+          <file> 112 1 68 66 67 41 42 44 45 46 47 43 49 48 50 51 52 65 54 53 56 55 58 59 60 57 62 61 64 63 0 108 113 107</file>
         </tool>
       </inputs>
     </file>

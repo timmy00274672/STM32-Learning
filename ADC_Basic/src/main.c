@@ -11,23 +11,15 @@
 
 int main(void)
 {
-	u32 ticks = 0;
-	float VolValue = 0.00;
+	
 	RCC_Configuration();
 	GPIO_Configuration();
 	USART_Configuration();
+	NVIC_Configuration();
 	ADC_Configuration();
 
 	printf("\r\nThe AD_Value : \r\n");
-	while(1)
-	{
-		if(ticks++ >= 2000000)
-		{
-			ticks = 0;
-			VolValue = 2.56 * ADC_GetConversionValue(ADC1) / 0x0FFF;
-			printf("\r\n = %.2fv \r\n", VolValue);
-		}
-	}
+	while(1);
 }
 
 /**
@@ -61,7 +53,8 @@ void RCC_Configuration(void)
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | 
     	RCC_APB2Periph_USART1 |
     	RCC_APB2Periph_ADC1 | 
-    	RCC_APB2Periph_GPIOB ,
+    	RCC_APB2Periph_GPIOB |
+    	RCC_APB2Periph_AFIO,
     	ENABLE);
 }
 
@@ -110,6 +103,7 @@ void GPIO_Configuration(void)
 		Rank 1
 		Sampling cycle : 55.5
 	4.	Calibrate
+	5.	Enable interrupt for end of the conversion
 **/
 void ADC_Configuration(void)
 {
@@ -131,6 +125,8 @@ void ADC_Configuration(void)
 	while(ADC_GetResetCalibrationStatus(ADC1));
 	ADC_StartCalibration(ADC1);
 	while(ADC_GetCalibrationStatus(ADC1));
+
+	ADC_ITConfig(ADC1, ADC_IT_EOC | ADC_IT_JEOC, ENABLE);
 
 	ADC_SoftwareStartConvCmd(ADC1,ENABLE);
 
@@ -176,6 +172,23 @@ void USART_Configuration(void)
     USART_Init(USART1, &USART_InitStructure);
     USART_Cmd(USART1, ENABLE);
 }
+
+/**
+*	Open the ADC1_2_IRQChannel
+**/
+void NVIC_Configuration(void)
+{
+	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+
+	NVIC_InitTypeDef NVIC_InitStruct;
+	NVIC_InitStruct.NVIC_IRQChannel = ADC1_2_IRQChannel;
+	NVIC_InitStruct.NVIC_IRQChannelPreemptionPriority = 1;
+	NVIC_InitStruct.NVIC_IRQChannelSubPriority = 0;
+	NVIC_InitStruct.NVIC_IRQChannelCmd = ENABLE;
+
+	NVIC_Init(&NVIC_InitStruct);	
+}
+
 
 /**
 *	Write the `ch` to USART1
