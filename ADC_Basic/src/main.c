@@ -118,7 +118,7 @@ void ADC_Configuration(void)
 	ADC_InitStruct.ADC_NbrOfChannel = 1;
 	ADC_Init(ADC1, &ADC_InitStruct);
 
-	ADC_RegularChannelConfig(ADC1, ADC_Channel_8, 1, ADC_SampleTime_55Cycles5);
+	ADC_RegularChannelConfig(ADC1, ADC_Channel_8, 1, ADC_SampleTime_239Cycles5);
 
 	ADC_Cmd(ADC1, ENABLE);
 	ADC_ResetCalibration(ADC1);
@@ -126,7 +126,7 @@ void ADC_Configuration(void)
 	ADC_StartCalibration(ADC1);
 	while(ADC_GetCalibrationStatus(ADC1));
 
-	ADC_ITConfig(ADC1, ADC_IT_EOC | ADC_IT_JEOC, ENABLE);
+	ADC_ITConfig(ADC1, ADC_IT_EOC, ENABLE);
 
 	ADC_SoftwareStartConvCmd(ADC1,ENABLE);
 

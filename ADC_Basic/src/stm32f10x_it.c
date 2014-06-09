@@ -12,7 +12,13 @@
 
 void ADC_IRQHandler(void)
 {
-	float VolValue = 0.00;
+	float  VolValue = 0.00;
 	VolValue = 2.56 * ADC_GetConversionValue(ADC1) / 0x0FFF;
 	printf("\r\n = %.2fv \r\n", VolValue);
+}
+
+void EXTI0_IRQHandler(void)
+{
+	//start
+	ADC_GetConversionValue(ADC1);
 }
