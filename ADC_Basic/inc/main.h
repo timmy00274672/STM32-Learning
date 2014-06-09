@@ -2,11 +2,11 @@
 * File Name      : 	main.h
 * Author         : 	timmy00274672 (timmy00274672@gmail.com)
 * Date           : 	06/09/2014
-* Version        : 	Version 1.0
+* Version        : 	Version 1.1
 * Description    : 	This head file for ADC_Basic 
 *******************************************************************************/
 #include "stm32f10x_lib.h"
-
+#include "stdio.h"
 /**
 *	open clock on APB2 : USART1 for communication
 						 GPIOA PA[9:10] 
@@ -44,3 +44,8 @@ void ADC_Configuration(void);
 	Set the Frame including BaudRate, WordLength, StopBits, Parity, HardareFlowControl, Mode
 **/
 void USART_Configuration(void);
+
+/**
+*	Write the `ch` to USART1
+**/
+int fputc(int ch, FILE *f);

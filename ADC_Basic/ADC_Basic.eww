@@ -2,7 +2,7 @@
 
 <workspace>
   <project>
-    <path>$WS_DIR$\DeepSleep.ewp</path>
+    <path>$WS_DIR$\ADC_Basic.ewp</path>
   </project>
   <batchBuild/>
 </workspace>
