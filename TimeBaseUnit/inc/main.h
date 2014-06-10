@@ -26,7 +26,7 @@ void GPIO_Configuration(void);
 /**
 *	Configurate TIM2 Base Unit (@ 1us)
 *		Period : 65535 
-*		Prescaler : 0	
+*		Prescaler : 7199
 *		ClockDivision : 0
 *		CounterMode : up
 *	Configurate TIM2 OC[1:4]
