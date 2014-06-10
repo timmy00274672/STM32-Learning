@@ -2,18 +2,21 @@
 * File Name			: 	main.c
 * Author			: 	timmy00274672 (timmy00274672@gmail.com)
 * Date				: 	06/10/2014
-* Version			: 	Version 1.0
+* Version			: 	Version 1.2
 * Description		: 	This source file for TimeBaseUnit. 
-* Update			:	Implement RCC_Configuration, GPIO_Configuration,
-						NVIC_Configuration, TIM_Configuration
-* TODO 				:	implement main function
+* Update			:	fix NVIC_Configuration error
+						fic TIM_Configuration error
 *******************************************************************************/
 #include "main.h"
 #include "stm32f10x_lib.h"
 
 int main(void)
 {
-	//TODO
+	RCC_Configuration();
+	NVIC_Configuration();
+	GPIO_Configuration();
+	TIM_Configuration();
+	while(1);
 }
 /**
 *	open clock on APB1 : TIM2
@@ -69,7 +72,7 @@ void NVIC_Configuration(void)
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
 	
 	NVIC_InitTypeDef NVIC_InitStruct;
-	NVIC_InitStruct.NVIC_IRQChannel = TIM2_IRQHandler;
+	NVIC_InitStruct.NVIC_IRQChannel = TIM2_IRQChannel;
 	NVIC_InitStruct.NVIC_IRQChannelPreemptionPriority = 0;
 	NVIC_InitStruct.NVIC_IRQChannelSubPriority = 0;
 	NVIC_InitStruct.NVIC_IRQChannelCmd = ENABLE;
@@ -96,7 +99,7 @@ void TIM_Configuration(void)
 	TIM_TimeBaseInitTypeDef TIM_TimeBaseInitStruct;
 
 	TIM_TimeBaseInitStruct.TIM_Prescaler = 7199;
-	TIM_TimeBaseInitStruct.TIM_CounterMode = TIM_CounterMode;
+	TIM_TimeBaseInitStruct.TIM_CounterMode = TIM_CounterMode_Up;
 	TIM_TimeBaseInitStruct.TIM_Period = 65535;
 	TIM_TimeBaseInitStruct.TIM_ClockDivision = 0;	
 	TIM_TimeBaseInitStruct.TIM_RepetitionCounter = 0;	
@@ -129,7 +132,7 @@ void TIM_Configuration(void)
 	TIM_OC3PreloadConfig(TIM2, TIM_OCPreload_Disable);
 	TIM_OC4PreloadConfig(TIM2, TIM_OCPreload_Disable);
 
-	TIM_ITConfig(TIM2, u16 TIM_IT_CC1 | TIM_IT_CC2 | TIM_IT_CC3 | TIM_IT_CC4, ENABLE);
+	TIM_ITConfig(TIM2, TIM_IT_CC1 | TIM_IT_CC2 | TIM_IT_CC3 | TIM_IT_CC4, ENABLE);
 
 	TIM_Cmd(TIM2, ENABLE);
 }
