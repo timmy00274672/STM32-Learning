@@ -23,30 +23,30 @@ void TIM2_IRQHandler(void)
 
 	if(TIM_GetITStatus(TIM2,TIM_IT_CC1) != RESET)
 	{
-		GPIO_WriteBit(GPIOA,GPIO_Pin_4, 1-GPIO_ReadInputDataBit(GPIOA,GPIO_Pin_4));
+		GPIO_WriteBit(GPIOA,GPIO_Pin_4, (BitAction)(1-GPIO_ReadOutputDataBit(GPIOA,GPIO_Pin_4)));
 		capture = TIM_GetCapture1(TIM2);
 		TIM_SetCompare1(TIM2, capture + CCR1_Val);
 		TIM_ClearITPendingBit(TIM2, TIM_IT_CC1);
 
 	}else if(TIM_GetITStatus(TIM2,TIM_IT_CC2) != RESET)
 	{
-		GPIO_WriteBit(GPIOA,GPIO_Pin_5, 1-GPIO_ReadInputDataBit(GPIOA,GPIO_Pin_5));
-		capture = TIM_GetCapture1(TIM2);
-		TIM_SetCompare1(TIM2, capture + CCR2_Val);
+		GPIO_WriteBit(GPIOA,GPIO_Pin_5, (BitAction)(1-GPIO_ReadOutputDataBit(GPIOA,GPIO_Pin_5)));
+		capture = TIM_GetCapture2(TIM2);
+		TIM_SetCompare2(TIM2, capture + CCR2_Val);
 		TIM_ClearITPendingBit(TIM2, TIM_IT_CC2);
 
 	}else if(TIM_GetITStatus(TIM2,TIM_IT_CC3) != RESET)
 	{
-		GPIO_WriteBit(GPIOA,GPIO_Pin_6, 1-GPIO_ReadInputDataBit(GPIOA,GPIO_Pin_6));
-		capture = TIM_GetCapture1(TIM2);
-		TIM_SetCompare1(TIM2, capture + CCR3_Val);
+		GPIO_WriteBit(GPIOA,GPIO_Pin_6, (BitAction)(1-GPIO_ReadOutputDataBit(GPIOA,GPIO_Pin_6)));
+		capture = TIM_GetCapture3(TIM2);
+		TIM_SetCompare3(TIM2, capture + CCR3_Val);
 		TIM_ClearITPendingBit(TIM2, TIM_IT_CC3);
 
 	}if(TIM_GetITStatus(TIM2,TIM_IT_CC4) != RESET)
 	{
-		GPIO_WriteBit(GPIOA,GPIO_Pin_7, 1-GPIO_ReadInputDataBit(GPIOA,GPIO_Pin_7));
-		capture = TIM_GetCapture1(TIM2);
-		TIM_SetCompare1(TIM2, capture + CCR4_Val);
+		GPIO_WriteBit(GPIOA,GPIO_Pin_7, (BitAction)(1-GPIO_ReadOutputDataBit(GPIOA,GPIO_Pin_7)));
+		capture = TIM_GetCapture4(TIM2);
+		TIM_SetCompare4(TIM2, capture + CCR4_Val);
 		TIM_ClearITPendingBit(TIM2, TIM_IT_CC4);
 		
 	}
