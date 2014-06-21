@@ -6,6 +6,7 @@
 * Description    : 	This head file for TIMPWMInput. 
 *******************************************************************************/
 #include "stm32f10x_lib.h"
+#include "stdio.h"
 
 /**
 *	open clock on APB1 : TIM2 for I/P 
